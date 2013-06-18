@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
+	<classpathentry sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet/2.1.2/source/a839f564756d2598ea7bcef76ae374ebb46e3635/org.restlet-2.1.2-sources.jar" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet/2.1.2/jar/230fd58c7d77de2a50f61dbaf9e024588af5567b/org.restlet-2.1.2.jar" exported="true"/>
+	<classpathentry sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.ext.json/2.1.2/source/d97777c416e6178d9afe65d32555dfc226704572/org.restlet.ext.json-2.1.2-sources.jar" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.ext.json/2.1.2/jar/d3035715cf95bed621946158fdbcc7ed8c439603/org.restlet.ext.json-2.1.2.jar" exported="true"/>
+	<classpathentry kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.lib.org.json/2.0/jar/aa0e3bef5e0c3660a3e69529a3d8b71b4ecd291a/org.restlet.lib.org.json-2.0.jar" exported="true"/>
+</classpath>

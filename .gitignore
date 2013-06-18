@@ -1,5 +1,8 @@
 *.class
 
 .gradle
+.settings
+
+build
 
 # Package Files #
