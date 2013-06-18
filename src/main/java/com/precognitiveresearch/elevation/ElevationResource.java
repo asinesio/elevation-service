@@ -2,23 +2,38 @@ package com.precognitiveresearch.elevation;
 
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 
-//@Path("/") // this is the root resource  
-//@Produces("application/json")  
-//@Component
+import com.precognitiveresearch.elevation.domain.Coordinate;
+import com.precognitiveresearch.elevation.service.ElevationQueryService;
+
+
 public class ElevationResource extends ServerResource {
 
-	private String latitude;
-	private String longitude;
+	@Autowired
+	private ElevationQueryService elevationQueryService;
+	
+	private Coordinate coordinate;
 	
 	public void init() {
-		 this.latitude = (String) getRequestAttributes().get("latitude");
-		 this.longitude = (String) getRequestAttributes().get("longitude");
+		 String latitude = (String) getRequestAttributes().get("latitude");
+		 String longitude = (String) getRequestAttributes().get("longitude");
 	}
 	
 	 @Get
 	 public int getElevation() {
 		 return 0;
 	 }
+
+	public ElevationQueryService getElevationQueryService() {
+		return elevationQueryService;
+	}
+
+	public void setElevationQueryService(ElevationQueryService elevationQueryService) {
+		this.elevationQueryService = elevationQueryService;
+	}
+	 
+	 
 
 }

@@ -18,6 +18,5 @@ dependencies {
 	compile "org.restlet.jse:org.restlet.ext.json:2.1.2"
 	compile "org.restlet.jse:org.restlet.ext.jackson:2.1.2"
 	compile "org.restlet.jse:org.restlet.ext.spring:2.1.2"
-	compile "org.restlet.jse:org.restlet.ext.jaxrs:2.1.2"
 	testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
 }
