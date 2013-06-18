@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="output" path="bin"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER" exported="true"/>
-	<classpathentry sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet/2.1.2/source/a839f564756d2598ea7bcef76ae374ebb46e3635/org.restlet-2.1.2-sources.jar" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet/2.1.2/jar/230fd58c7d77de2a50f61dbaf9e024588af5567b/org.restlet-2.1.2.jar" exported="true"/>
-	<classpathentry sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.ext.json/2.1.2/source/d97777c416e6178d9afe65d32555dfc226704572/org.restlet.ext.json-2.1.2-sources.jar" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.ext.json/2.1.2/jar/d3035715cf95bed621946158fdbcc7ed8c439603/org.restlet.ext.json-2.1.2.jar" exported="true"/>
-	<classpathentry kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.lib.org.json/2.0/jar/aa0e3bef5e0c3660a3e69529a3d8b71b4ecd291a/org.restlet.lib.org.json-2.0.jar" exported="true"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src/test/groovy"/>
+	<classpathentry exported="true" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet/2.1.2/jar/230fd58c7d77de2a50f61dbaf9e024588af5567b/org.restlet-2.1.2.jar" sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet/2.1.2/source/a839f564756d2598ea7bcef76ae374ebb46e3635/org.restlet-2.1.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.ext.json/2.1.2/jar/d3035715cf95bed621946158fdbcc7ed8c439603/org.restlet.ext.json-2.1.2.jar" sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.ext.json/2.1.2/source/d97777c416e6178d9afe65d32555dfc226704572/org.restlet.ext.json-2.1.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.spockframework/spock-core/0.7-groovy-2.0/jar/4de0b428de0c14b6eb6375d8174f71848cbfc1d7/spock-core-0.7-groovy-2.0.jar" sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.spockframework/spock-core/0.7-groovy-2.0/source/19f1e62a5094604766f83e55a693b9cdac3b271a/spock-core-0.7-groovy-2.0-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.restlet.jse/org.restlet.lib.org.json/2.0/jar/aa0e3bef5e0c3660a3e69529a3d8b71b4ecd291a/org.restlet.lib.org.json-2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.hamcrest/hamcrest-core/1.3/jar/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar" sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.hamcrest/hamcrest-core/1.3/source/1dc37250fbc78e23a65a67fbbaf71d2e9cbc3c0b/hamcrest-core-1.3-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/junit/junit-dep/4.10/jar/64417b3bafdecd366afa514bd5beeae6c1f85ece/junit-dep-4.10.jar" sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/junit/junit-dep/4.10/source/2c7dad0a5eb1602c6fe6b43abec8ea35805b3ae4/junit-dep-4.10-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/filter/.gradle/caches/artifacts-24/filestore/org.codehaus.groovy/groovy-all/2.0.5/jar/caef1126e5358bf1327e8b4381a827da9accbb47/groovy-all-2.0.5.jar" sourcepath="/Users/filter/.gradle/caches/artifacts-24/filestore/org.codehaus.groovy/groovy-all/2.0.5/source/77c137f40bebfc3d9c49f6bf819840b613f60d18/groovy-all-2.0.5-sources.jar"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>

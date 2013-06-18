@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'eclipse'
 
 task wrapper(type: Wrapper) {
@@ -15,4 +16,5 @@ repositories {
 dependencies {
 	compile "org.restlet.jse:org.restlet:2.1.2"
 	compile "org.restlet.jse:org.restlet.ext.json:2.1.2"
+	testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
 }
