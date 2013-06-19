@@ -41,9 +41,9 @@ Return elevation data for a given latitude/longitude. Example: `http://localhost
     </thead>
     <tbody>
         <tr>
-            <td><pre>GET</pre></td>
-            <td><pre>application/json</pre></td>
-            <td><pre>http://localhost:3000/elevation/{latitude}/{longitude}</pre></td>
+            <td>GET</td>
+            <td>application/json</td>
+            <td>http://localhost:3000/elevation/{latitude}/{longitude}</td>
         </tr>
     </tbody>
 </table>
