@@ -8,23 +8,22 @@ Elevation Service will download height files automatically from the USGS's file 
 
 ##Usage
 
-Prerequisites: **Java 1.6**
+**Prerequisites: JDK 1.6 or later.**
 
-* Clone the repository and change into it.
+Clone the repository and change into it.
 
 ```
     git clone https://github.com/asinesio/elevation-service.git
     cd elevation-service
 ```
 
-* Use gradle to run the app locally:
+Use gradle to run the app locally:
 
 ```
     ./gradlew run
 ```
 
-* The app will begin running at http://localhost:3000.
-
+If all went well, the app will begin listening at `http://localhost:3000`.
 
 ## API
 
@@ -32,12 +31,44 @@ Prerequisites: **Java 1.6**
 
 Return elevation data for a given latitude/longitude. Example: `http://localhost:3000/elevation/37.331789/-122.029620`
 
-| Method	| Response Content Types	| URL Format
-| GET		| `application/json`		| `http://localhost:3000/elevation/{latitude}/{longitude}`
+<table>
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Response Content Types</th>
+            <th>URL Format</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><pre>GET</pre></td>
+            <td><pre>application/json</pre></td>
+            <td><pre>http://localhost:3000/elevation/{latitude}/{longitude}</pre></td>
+        </tr>
+    </tbody>
+</table>
 
-| HTTP Status	| Response										| Example
-| 200 OK		| JSON object containing elevation in meters 	| {elevation: 100}
-| 404 NOT FOUND	| JSON object with no data						| {}
+
+<table>
+    <thead>
+        <tr>
+            <th>HTTP Status</th>
+            <th>Response</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>200 OK</td>
+            <td>JSON object containing elevation in meters</td>
+            <td>{elevation: 100}</td>
+        </tr>
+        <tr>
+            <td>404 NOT FOUND</td>
+            <td>JSON object with no data</td>
+            <td>{}</td>
+        </tr>
+</table>
 
 ## Technology Stack
 
