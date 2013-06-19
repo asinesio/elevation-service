@@ -76,6 +76,7 @@ Elevation Service uses the following technologies:
 
 * Java 1.6 or later
 * [Restlet 2.1](http://www.restlet.org) for the container and REST support
+* [Spring 3.0](http://www.springframework.org) for dependency injection
 * [Spock](http://spockframework.org) and [Groovy](http://groovy.codehaus.org) for testing
 * [Gradle Wrapper](http://www.gradle.org/docs/current/userguide/gradle_wrapper.html) for builds 
 
