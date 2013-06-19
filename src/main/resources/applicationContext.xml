@@ -9,6 +9,13 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.precognitiveresearch" />
 
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>application.properties</value>
+		</property>
+	</bean>
+
 	<bean id="top" class="org.restlet.ext.spring.SpringComponent">
 		<property name="server">
 			<bean class="org.restlet.ext.spring.SpringServer">
@@ -32,7 +39,7 @@
 	</bean>
 
 	<bean id="root" class="org.restlet.ext.spring.SpringRouter">
-		
+
 	</bean>
 
 	<bean id="elevationResource" class="com.precognitiveresearch.elevation.ElevationResource"

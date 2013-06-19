@@ -2,6 +2,13 @@ package com.precognitiveresearch.elevation.domain;
 
 import java.io.Serializable;
 
+/**
+ * Represents elevation of a specific coordinate on Earth.
+ * 
+ * @author Andy Sinesio
+ *
+ * @Immutable
+ */
 public class Elevation implements Serializable, Comparable<Elevation> {
 	
 	public static final Elevation UNKNOWN = new Elevation(Integer.MIN_VALUE);

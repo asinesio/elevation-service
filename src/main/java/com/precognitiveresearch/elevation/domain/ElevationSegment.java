@@ -4,6 +4,14 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents an "elevation segment" which correlates to one SRTM file. 
+ * These objects will be cached.
+ * 
+ * @author Andy Sinesio
+ *
+ * @Immutable
+ */
 public class ElevationSegment implements Serializable {
 
 	private static final long serialVersionUID = 3628951214741897043L;
