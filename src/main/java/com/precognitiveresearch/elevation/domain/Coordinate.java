@@ -5,30 +5,39 @@ import java.io.Serializable;
 public class Coordinate implements Serializable {
 
 	private static final long serialVersionUID = 1551094756045774365L;
-	
-	private final float latitude;
-	private final float longitude;
-	
-	public Coordinate(float latitude, float longitude) {
+
+	private final double latitude;
+	private final double longitude;
+
+	public Coordinate(double latitude, double longitude) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
-	public float getLatitude() {
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public float getLongitude() {
+	public double getLongitude() {
 		return longitude;
+	}
+
+	public String getSegmentIdentifier() {
+		String left = String.format("%03d", (int) Math.abs(Math.floor(longitude)));
+		String bottom = String.format("%02d", (int) Math.abs(Math.floor(latitude)));
+		return ((latitude > 0) ? "N" : "S") + bottom + ((longitude > 0) ? "E" : "W") + left;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Float.floatToIntBits(latitude);
-		result = prime * result + Float.floatToIntBits(longitude);
+		long temp;
+		temp = Double.doubleToLongBits(latitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(longitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -41,11 +50,11 @@ public class Coordinate implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Coordinate other = (Coordinate) obj;
-		if (Float.floatToIntBits(latitude) != Float
-				.floatToIntBits(other.latitude))
+		if (Double.doubleToLongBits(latitude) != Double
+				.doubleToLongBits(other.latitude))
 			return false;
-		if (Float.floatToIntBits(longitude) != Float
-				.floatToIntBits(other.longitude))
+		if (Double.doubleToLongBits(longitude) != Double
+				.doubleToLongBits(other.longitude))
 			return false;
 		return true;
 	}
