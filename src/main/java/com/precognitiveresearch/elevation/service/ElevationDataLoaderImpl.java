@@ -17,9 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import com.precognitiveresearch.elevation.domain.Coordinate;
 import com.precognitiveresearch.elevation.domain.ElevationSegment;
 
 @Service
@@ -38,23 +38,24 @@ public class ElevationDataLoaderImpl implements ElevationDataLoader {
 	}
 
 	@Override
-	public ElevationSegment load(Coordinate coordinate) {
+	@Cacheable("elevationSegments")
+	public ElevationSegment load(String segmentIdentifier) {
 		// load a segment for a coordinate
 		try {
-			LOG.trace("Starting load of elevation segment for coordinate: " + coordinate.toString());
-			List<Short> data = getElevationDataForCoordinate(coordinate);
+			LOG.trace("Starting load of elevation segment " + segmentIdentifier);
+			List<Short> data = getElevationDataForSegment(segmentIdentifier);
 			LOG.trace
-			("Completed load of elevation segment for coordinate: " + coordinate.toString());
-			return new ElevationSegment(coordinate, data);
+			("Completed load of elevation segment " + segmentIdentifier);
+			return new ElevationSegment(segmentIdentifier, data);
 		} catch (IOException e) {
 			// log the exception.
-			LOG.error("Error getting elevation data for coordinate " + coordinate.toString(), e);
+			LOG.error("Error loading elevation segment " + segmentIdentifier, e);
 		}
 		return new ElevationSegment("test", new ArrayList<Short>());
 	}
 
-	private List<Short> getElevationDataForCoordinate(Coordinate coordinate) throws IOException {
-		String url = baseFileURLString + coordinate.getSegmentIdentifier() + fileExtension;
+	private List<Short> getElevationDataForSegment(String segmentIdentifier) throws IOException {
+		String url = baseFileURLString + segmentIdentifier + fileExtension;
 		URL fileURL = new URL(url);
 		InputStream inputStream = fileURL.openStream();
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
