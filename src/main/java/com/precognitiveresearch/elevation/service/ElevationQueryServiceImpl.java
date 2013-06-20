@@ -21,7 +21,7 @@ public class ElevationQueryServiceImpl implements ElevationQueryService {
 	@Override
 	public Elevation getElevation(Coordinate coordinate) {
 		ElevationSegment segment = elevationDataLoader.load(coordinate);
-		return new Elevation(100);
+		return segment.getElevationForCoordinate(coordinate);
 	}
 
 }

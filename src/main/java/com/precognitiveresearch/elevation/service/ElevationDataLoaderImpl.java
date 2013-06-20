@@ -4,7 +4,6 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +13,8 @@ import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,13 @@ import com.precognitiveresearch.elevation.domain.ElevationSegment;
 @Service
 public class ElevationDataLoaderImpl implements ElevationDataLoader {
 	
+	private static final Logger LOG = LoggerFactory.getLogger(ElevationDataLoaderImpl.class);
+	
 	private final String baseFileURLString;
 	private final String fileExtension;
 
 	@Autowired
 	public ElevationDataLoaderImpl(@Value("${srtm.base.url}") String baseFileURLString, @Value("${srtm.file.extension}") String fileExtension) {
-		
-		
 		super();
 		this.baseFileURLString = baseFileURLString;
 		this.fileExtension = fileExtension;
@@ -40,13 +41,16 @@ public class ElevationDataLoaderImpl implements ElevationDataLoader {
 	public ElevationSegment load(Coordinate coordinate) {
 		// load a segment for a coordinate
 		try {
+			LOG.trace("Starting load of elevation segment for coordinate: " + coordinate.toString());
 			List<Short> data = getElevationDataForCoordinate(coordinate);
+			LOG.trace
+			("Completed load of elevation segment for coordinate: " + coordinate.toString());
 			return new ElevationSegment(coordinate, data);
 		} catch (IOException e) {
 			// log the exception.
-			e.printStackTrace();
+			LOG.error("Error getting elevation data for coordinate " + coordinate.toString(), e);
 		}
-		return new ElevationSegment("test",new ArrayList<Short>());
+		return new ElevationSegment("test", new ArrayList<Short>());
 	}
 
 	private List<Short> getElevationDataForCoordinate(Coordinate coordinate) throws IOException {
@@ -56,20 +60,21 @@ public class ElevationDataLoaderImpl implements ElevationDataLoader {
 		BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
 		ArchiveInputStream archiveInputStream = null;
 		DataInputStream dataInputStream = null;
+		
 		try {
-			List<Short> data = new ArrayList<Short>(1021 * 1021);
 			archiveInputStream = new ArchiveStreamFactory().createArchiveInputStream(bufferedInputStream);
 			ArchiveEntry archiveEntry = archiveInputStream.getNextEntry(); // first entry in file
 			dataInputStream = new DataInputStream(archiveInputStream);
-			long size = archiveEntry.getSize() / 2;  // shorts = 2 bytes
+			int size = (int) (archiveEntry.getSize() / 2);  // shorts = 2 bytes
+			List<Short> data = new ArrayList<Short>(size);
 			for (int i = 0; i < size; i++) {
 				data.add(dataInputStream.readShort());
 			}
 			return data;
 		} catch (ArchiveException e) {
-			e.printStackTrace();
+			LOG.error("Error unpacking SRTM3 archive, returning none", e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOG.error("Error reading input stream from USGS", e);
 		} finally {
 			IOUtils.closeQuietly(inputStream);
 			IOUtils.closeQuietly(bufferedInputStream);
@@ -77,7 +82,6 @@ public class ElevationDataLoaderImpl implements ElevationDataLoader {
 			IOUtils.closeQuietly(dataInputStream);
 		}
 		return new ArrayList<Short>();
-		
 	}
 	
 

@@ -49,6 +49,11 @@ public class Elevation implements Serializable, Comparable<Elevation> {
 	}
 
 	@Override
+	public String toString() {
+		return "Elevation [elevation=" + elevation + "]";
+	}
+
+	@Override
 	public int compareTo(Elevation other) {
 		return Integer.valueOf(elevation).compareTo(Integer.valueOf(other.getElevation()));
 	}	

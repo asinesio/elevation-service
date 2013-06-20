@@ -19,9 +19,13 @@ repositories {
 dependencies {
 	compile "commons-io:commons-io:2.4"
 	compile "org.apache.commons:commons-compress:1.5"
+	compile "org.slf4j:slf4j-api:1.7.5"
 	compile "org.restlet.jse:org.restlet:2.1.2"
 	compile "org.restlet.jse:org.restlet.ext.json:2.1.2"
 	compile "org.restlet.jse:org.restlet.ext.jackson:2.1.2"
 	compile "org.restlet.jse:org.restlet.ext.spring:2.1.2"
+	
+	runtime "org.slf4j:slf4j-jdk14:1.7.5"
+	
 	testCompile "org.spockframework:spock-core:0.7-groovy-2.0"
 }
