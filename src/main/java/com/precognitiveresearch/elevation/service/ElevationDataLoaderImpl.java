@@ -1,17 +1,16 @@
 package com.precognitiveresearch.elevation.service;
 
-import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
-import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.ArchiveException;
 import org.apache.commons.compress.archivers.ArchiveInputStream;
-import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +20,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.precognitiveresearch.elevation.domain.ElevationSegment;
+import com.precognitiveresearch.elevation.exception.UnexpectedElevationQueryException;
 
 @Service
 public class ElevationDataLoaderImpl implements ElevationDataLoader {
@@ -48,42 +48,34 @@ public class ElevationDataLoaderImpl implements ElevationDataLoader {
 			("Completed load of elevation segment " + segmentIdentifier);
 			return new ElevationSegment(segmentIdentifier, data);
 		} catch (IOException e) {
-			// log the exception.
-			LOG.error("Error loading elevation segment " + segmentIdentifier, e);
+			throw new UnexpectedElevationQueryException("Error loading elevation segment " + segmentIdentifier, e);
 		}
-		return new ElevationSegment("test", new ArrayList<Short>());
 	}
 
 	private List<Short> getElevationDataForSegment(String segmentIdentifier) throws IOException {
 		String url = baseFileURLString + segmentIdentifier + fileExtension;
 		URL fileURL = new URL(url);
 		InputStream inputStream = fileURL.openStream();
-		BufferedInputStream bufferedInputStream = new BufferedInputStream(inputStream);
-		ArchiveInputStream archiveInputStream = null;
+		ZipInputStream zipInputStream = null;
 		DataInputStream dataInputStream = null;
-		
 		try {
-			archiveInputStream = new ArchiveStreamFactory().createArchiveInputStream(bufferedInputStream);
-			ArchiveEntry archiveEntry = archiveInputStream.getNextEntry(); // first entry in file
-			dataInputStream = new DataInputStream(archiveInputStream);
+			zipInputStream = new ZipInputStream(inputStream);
+			ZipEntry archiveEntry = zipInputStream.getNextEntry();
+			dataInputStream = new DataInputStream(zipInputStream);
 			int size = (int) (archiveEntry.getSize() / 2);  // shorts = 2 bytes
+			
 			List<Short> data = new ArrayList<Short>(size);
-			for (int i = 0; i < size; i++) {
-				data.add(dataInputStream.readShort());
+			LOG.info("Loading " + size + " elevations into data array.");
+			for (int i = 0; i < size; i ++) {
+					data.add(dataInputStream.readShort());
 			}
 			return data;
-		} catch (ArchiveException e) {
-			LOG.error("Error unpacking SRTM3 archive, returning none", e);
 		} catch (IOException e) {
-			LOG.error("Error reading input stream from USGS", e);
+			throw new UnexpectedElevationQueryException("Error unpacking SRTM3 archive for identifier " + segmentIdentifier, e);
 		} finally {
 			IOUtils.closeQuietly(inputStream);
-			IOUtils.closeQuietly(bufferedInputStream);
-			IOUtils.closeQuietly(archiveInputStream);
+			IOUtils.closeQuietly(zipInputStream);
 			IOUtils.closeQuietly(dataInputStream);
 		}
-		return new ArrayList<Short>();
 	}
-	
-
 }

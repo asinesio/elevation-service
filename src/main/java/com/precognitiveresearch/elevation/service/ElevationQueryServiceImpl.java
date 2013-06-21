@@ -1,32 +1,35 @@
 package com.precognitiveresearch.elevation.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.precognitiveresearch.elevation.domain.Coordinate;
 import com.precognitiveresearch.elevation.domain.Elevation;
 import com.precognitiveresearch.elevation.domain.ElevationSegment;
+import com.precognitiveresearch.elevation.exception.ElevationNotFoundException;
 
 @Service
 public class ElevationQueryServiceImpl implements ElevationQueryService {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(ElevationQueryServiceImpl.class);
 
-	private final CacheManager cacheManager;
 	private final ElevationDataLoader elevationDataLoader;
 	
 	@Autowired	
-	public ElevationQueryServiceImpl(ElevationDataLoader elevationDataLoader, CacheManager cacheManager) {
+	public ElevationQueryServiceImpl(ElevationDataLoader elevationDataLoader) {
 		super();
 		this.elevationDataLoader = elevationDataLoader;
-		this.cacheManager = cacheManager;
 	}
 
 	@Override
 	@Cacheable("elevationQueries")
-	public Elevation getElevation(Coordinate coordinate) {
-		//cacheManager.getCache("elevationSegments");
+	public Elevation getElevation(Coordinate coordinate) throws ElevationNotFoundException {
+		LOG.info("Getting elevation segment for coordinate: " + coordinate.toString());
 		ElevationSegment segment = elevationDataLoader.load(coordinate.getSegmentIdentifier());
+		LOG.info("Querying segment " + segment.toString() + " for elevation");
 		return segment.getElevationForCoordinate(coordinate);
 	}
 

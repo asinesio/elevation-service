@@ -25,7 +25,7 @@ class ElevationSegmentSpec extends Specification {
 
 	def "Verify get elevation for segment"() {
 		setup:
-		List<Short> elevations = Arrays.asList(new Short[1200*1200])
+		List<Short> elevations = Arrays.asList(new Short[1201*1201])
 		elevations[arrayIndex] = (short) 1234
 		Coordinate coordinate = new Coordinate(latitude, longitude)
 		ElevationSegment segment = new ElevationSegment(coordinate, elevations)
@@ -35,7 +35,7 @@ class ElevationSegmentSpec extends Specification {
 		
 		where:
 		latitude | longitude | arrayIndex
-		37       | 100       | 0
-		100.1    | 100.1     | 120 * 120
+		37       | 100       | 1201 * 1200 // first column of last row of data, 1441200
+		100.1    | 100.1     | 120 + 1201 * (1201 - 120 - 1) // 120 rows and columns in = 1297200
 	}
 }
