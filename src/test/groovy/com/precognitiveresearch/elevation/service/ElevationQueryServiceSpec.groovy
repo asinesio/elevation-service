@@ -3,8 +3,8 @@ package com.precognitiveresearch.elevation.service
 import spock.lang.Specification
 
 import com.precognitiveresearch.elevation.domain.Coordinate
-import com.precognitiveresearch.elevation.domain.Elevation
 import com.precognitiveresearch.elevation.domain.ElevationSegment
+import com.precognitiveresearch.elevation.exception.ElevationNotFoundException
 
 
 class ElevationQueryServiceSpec extends Specification {
@@ -22,6 +22,6 @@ class ElevationQueryServiceSpec extends Specification {
 		
 		then:
 		1 * mockLoader.load(coordinate.getSegmentIdentifier()) >> new ElevationSegment(coordinate, elevations)
-		elevation == Elevation.UNKNOWN
+		ElevationNotFoundException ex = thrown()
 	}
 }

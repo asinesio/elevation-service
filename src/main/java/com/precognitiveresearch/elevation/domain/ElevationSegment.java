@@ -8,6 +8,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.precognitiveresearch.elevation.exception.ElevationNotFoundException;
+
 /**
  * Represents an "elevation segment" which correlates to one SRTM file. These
  * objects will be cached.
@@ -45,11 +47,14 @@ public class ElevationSegment implements Serializable {
 		this.elevations = Collections.unmodifiableList(elevations);
 	}
 
-	public Elevation getElevationForCoordinate(Coordinate coordinate) {
-		int index = getElevationIndexForCoordinate(coordinate);
-		
-		return index > 0 && index < elevations.size() ? new Elevation(elevations.get(index))
-				: Elevation.UNKNOWN;
+	public Elevation getElevationForCoordinate(Coordinate coordinate) throws ElevationNotFoundException {
+		if (appliesToCoordinate(coordinate)) {
+			int index = getElevationIndexForCoordinate(coordinate);
+			if (index > 0 && index < elevations.size()) {
+				return new Elevation(elevations.get(index));
+			}
+		}
+		throw new ElevationNotFoundException("Coordinate " + coordinate.toString() + " is not found in segment " + this.toString());
 	}
 
 	public boolean appliesToCoordinate(Coordinate coordinate) {

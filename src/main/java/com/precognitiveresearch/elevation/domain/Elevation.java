@@ -16,14 +16,20 @@ public class Elevation implements Serializable, Comparable<Elevation> {
 	private static final long serialVersionUID = 901174514158647077L;
 	
 	private final int elevation;
+	private final String units;
 
 	public Elevation(int elevation) {
 		super();
 		this.elevation = elevation;
+		this.units = "meters";
 	}
 
 	public int getElevation() {
 		return elevation;
+	}
+	
+	public String getUnits() {
+		return units;
 	}
 
 	@Override

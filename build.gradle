@@ -2,12 +2,18 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
 apply plugin: 'application'
+apply plugin: 'project-report'
+
+// Cobertura
+buildscript {
+	apply from: 'https://github.com/valkolovos/gradle_cobertura/raw/master/repo/gradle_cobertura/gradle_cobertura/1.0/coberturainit.gradle'
+}
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '1.6'
 }
 
-mainClassName = "com.precognitiveresearch.elevation.ElevationApplication"
+mainClassName = "com.precognitiveresearch.elevation.restlet.ElevationApplication"
 
 repositories {
     mavenCentral()
@@ -16,12 +22,9 @@ repositories {
 	}
 }
 
-
 def springVersion = "3.2.3.RELEASE"
 dependencies {
-	
 	compile "commons-io:commons-io:2.4"
-	compile "org.apache.commons:commons-compress:1.5"
 	compile "org.springframework:spring-beans:${springVersion}"
 	compile "org.springframework:spring-expression:${springVersion}"
 	compile "org.springframework:spring-aop:${springVersion}"

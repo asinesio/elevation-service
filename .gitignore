@@ -2,6 +2,7 @@
 
 .gradle
 .settings
+.DS_Store
 
 build
 

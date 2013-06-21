@@ -29,6 +29,9 @@ public class ElevationQueryServiceImpl implements ElevationQueryService {
 	public Elevation getElevation(Coordinate coordinate) throws ElevationNotFoundException {
 		LOG.info("Getting elevation segment for coordinate: " + coordinate.toString());
 		ElevationSegment segment = elevationDataLoader.load(coordinate.getSegmentIdentifier());
+		if (segment == null) {
+			throw new ElevationNotFoundException("No elevation found for " + coordinate.toString());
+		}
 		LOG.info("Querying segment " + segment.toString() + " for elevation");
 		return segment.getElevationForCoordinate(coordinate);
 	}

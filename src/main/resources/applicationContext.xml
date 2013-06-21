@@ -24,7 +24,7 @@
 		<property name="server">
 			<bean class="org.restlet.ext.spring.SpringServer">
 				<constructor-arg value="http" />
-				<constructor-arg value="3000" />
+				<constructor-arg value="${server.port}" />
 			</bean>
 		</property>
 		<property name="defaultTarget" ref="default" />
@@ -42,13 +42,12 @@
 		</property>
 	</bean>
 
-	<bean id="elevationResource" class="com.precognitiveresearch.elevation.ElevationResource"
+	<bean id="elevationResource" class="com.precognitiveresearch.elevation.restlet.ElevationResource"
 		scope="prototype" />
 
 	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
 		<property name="cacheManager" ref="ehcache" />
 	</bean>
-
 
 	<bean id="ehcache"
 		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
