@@ -61,7 +61,7 @@ Return elevation data for a given latitude/longitude. Example: `http://localhost
         <tr>
             <td>200 OK</td>
             <td>JSON object containing elevation in meters</td>
-            <td>{elevation: 100}</td>
+            <td>{"elevation":100,"units":"meters"}</td>
         </tr>
         <tr>
             <td>404 NOT FOUND</td>
