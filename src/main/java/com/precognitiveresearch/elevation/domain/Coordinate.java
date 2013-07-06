@@ -1,21 +1,21 @@
 package com.precognitiveresearch.elevation.domain;
 
-import java.io.Serializable;
-
 /**
  * Represents a latitude/longitude pair.
  * @author Andy Sinesio
  * 
  * @Immutable
  */
-public class Coordinate implements Serializable {
-
-	private static final long serialVersionUID = 1551094756045774365L;
+public final class Coordinate {
 
 	private final double latitude;
 	private final double longitude;
+	
+	public static Coordinate newCoordinate(double latitude, double longitude) {
+		return new Coordinate(latitude, longitude);
+	}
 
-	public Coordinate(double latitude, double longitude) {
+	private Coordinate(double latitude, double longitude) {
 		super();
 		this.latitude = latitude;
 		this.longitude = longitude;

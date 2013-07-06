@@ -3,22 +3,24 @@ package com.precognitiveresearch.elevation.domain;
 import java.io.Serializable;
 
 /**
- * Represents elevation of a specific coordinate on Earth.
+ * Represents elevation of a specific coordinate on Earth, in meters.
  * 
  * @author Andy Sinesio
  *
  * @Immutable
  */
-public class Elevation implements Serializable, Comparable<Elevation> {
+public final class Elevation implements Comparable<Elevation> {
 	
 	public static final Elevation UNKNOWN = new Elevation(Integer.MIN_VALUE);
 	
-	private static final long serialVersionUID = 901174514158647077L;
-	
 	private final int elevation;
 	private final String units;
+	
+	public static Elevation newMetricElevation(int elevation) {
+		return new Elevation(elevation);
+	}
 
-	public Elevation(int elevation) {
+	private Elevation(int elevation) {
 		super();
 		this.elevation = elevation;
 		this.units = "meters";

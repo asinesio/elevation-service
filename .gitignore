@@ -4,6 +4,9 @@
 .settings
 .DS_Store
 
+.classpath
+.project
+
 build
 
 # Package Files #

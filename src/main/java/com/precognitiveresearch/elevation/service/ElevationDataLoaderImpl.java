@@ -19,7 +19,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.precognitiveresearch.elevation.domain.ElevationSegment;
-import com.precognitiveresearch.elevation.exception.ElevationNotFoundException;
 import com.precognitiveresearch.elevation.exception.UnexpectedElevationQueryException;
 
 @Service
@@ -49,7 +48,7 @@ public class ElevationDataLoaderImpl implements ElevationDataLoader {
 			List<Short> data = getElevationDataForSegment(segmentIdentifier);
 			LOG.trace("Completed load of elevation segment "
 					+ segmentIdentifier);
-			return new ElevationSegment(segmentIdentifier, data);
+			return ElevationSegment.newSegmentFromIdentifier(segmentIdentifier, data);
 		} catch (FileNotFoundException e) {
 			LOG.error("Elevation segment " + segmentIdentifier + " not found.", e);
 			return null;

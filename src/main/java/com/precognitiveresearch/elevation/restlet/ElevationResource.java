@@ -52,7 +52,7 @@ public class ElevationResource extends ServerResource {
 		}
 		
 		try {
-			Coordinate coordinate = new Coordinate(Double.valueOf(latitude),
+			Coordinate coordinate = Coordinate.newCoordinate(Double.valueOf(latitude),
 					Double.valueOf(longitude));
 			LOG.debug("Querying for coordinate: " + coordinate.toString());
 			Elevation result = elevationQueryService.getElevation(coordinate);

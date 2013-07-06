@@ -4,6 +4,7 @@ apply plugin: 'eclipse'
 apply plugin: 'application'
 apply plugin: 'project-report'
 apply plugin: 'jmeter'
+apply plugin: 'findbugs'
 
 // Jmeter
 buildscript {
@@ -13,7 +14,18 @@ buildscript {
 
 task wrapper(type: Wrapper) { gradleVersion = '1.6' }
 
+tasks.withType(FindBugs) {
+	reports {
+		xml.enabled = false
+		html.enabled = true
+	}
+}
+
 mainClassName = "com.precognitiveresearch.elevation.restlet.ElevationApplication"
+
+jmeterRun.configure {
+	jmeterPropertyFile = new File("src/test/jmeter/jmeter.properties")
+}
 
 repositories {
 	mavenCentral()

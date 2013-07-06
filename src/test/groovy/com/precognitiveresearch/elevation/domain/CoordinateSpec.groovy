@@ -8,7 +8,7 @@ class CoordinateSpec extends Specification {
 		setup:
 		double latitude = 37.12345d
 		double longitude = -122.456d
-		Coordinate coordinate = new Coordinate(latitude, longitude)
+		Coordinate coordinate = Coordinate.newCoordinate(latitude, longitude)
 		
 		expect:
 		coordinate.latitude == latitude
@@ -22,7 +22,7 @@ class CoordinateSpec extends Specification {
 	
 	def "Verify equals"() {
 		setup:
-		Coordinate coords = new Coordinate(ElevationObjectMother.APPLE_HQ.latitude, ElevationObjectMother.APPLE_HQ.longitude);
+		Coordinate coords = Coordinate.newCoordinate(ElevationObjectMother.APPLE_HQ.latitude, ElevationObjectMother.APPLE_HQ.longitude);
 		
 		expect:
 		coords == ElevationObjectMother.APPLE_HQ
